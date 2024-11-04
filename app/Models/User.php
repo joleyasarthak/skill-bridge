@@ -18,7 +18,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'avatar',
+        'is_admin',
+        'email_verified_at',
         'name',
+        'username',
         'email',
         'password',
     ];
@@ -44,5 +48,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_users');
     }
 }
